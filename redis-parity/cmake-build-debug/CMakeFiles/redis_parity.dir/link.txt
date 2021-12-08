@@ -1,0 +1,3 @@
+"D:\Editor\CLion 2020.1.3\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\redis_parity.dir/objects.a
+D:\Git\mingw\bin\ar.exe cr CMakeFiles\redis_parity.dir/objects.a @CMakeFiles\redis_parity.dir\objects1.rsp
+D:\Git\mingw\bin\gcc.exe  -g  -shared -o libredis_parity.dll -Wl,--out-implib,libredis_parity.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\redis_parity.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\redis_parity.dir\linklibs.rsp

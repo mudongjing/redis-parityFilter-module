@@ -12,6 +12,7 @@
 
 #endif //REDIS_PARITY_BASE_H
 
+
 typedef enum
 {
     true=1, false=0
@@ -52,7 +53,7 @@ typedef struct sliceBitMap{
 typedef struct sliceBitMapArray{
     uint32_t layer;//对应的层数
     uint32_t len; // 副本数量
-    uint32_t lastWeight; // last bitMap对应的特定宽度
+    uint32_t lastWeight; // last bitMap对应的宽度 ，主要是后面的编程用的频繁，就额外定义
     sliceBitMap* slice[];
 }sliceBitMapArray;
 
@@ -69,17 +70,10 @@ typedef struct sliceChain{
  */
 typedef struct pfEntry{
     bool isBigData;// 如果是大数据情况就为true
-    //最大元素数量，是对应2的次幂，从7开始，加maxEle，最多支持2^70
-    uint32_t maxEle;
     uint16_t  conflictP; // 实际的计算前缀数量
     uint32_t layerStartStop;
-    // 是相对于设置的最大元素数量，再提升的2的次幂。
-    // 比如，元素数量设置了0，就是2^7,128个元素，那么，冲突概率设置为1，就是冲突概率为1/2^8，即1/256.
-    // 这样的设置，方便用户判断自己想要的结果。
-    // 比如用户设置了 最大的元素数量为1亿，那么最基础的条件就是冲突概率起码药师1/一亿，在此基础上，为了减小冲突概率，
-    // 用户可以选择提升多少倍，所以，这里设置的冲突概率是在最基础的条件下，让用户确定安全的倍数，而不是去自己计算需要的冲突概率
 
-    sliceChain* slicechain;//负责在需要压低成本时使用
+    sliceChain* slicechain;//副本链
 
     uint32_t high;//指定的最大高度
 
@@ -101,3 +95,11 @@ typedef struct intListNode{
     int value;
     struct initListNode* next;
 }listNodeInt;
+
+typedef struct pair{
+    bool copy;
+    int p;
+    int count;
+    int hight;
+}pair;
+pair getPAndW(int conflict);

@@ -69,14 +69,14 @@ static judgeAndintArr calEleLocal(char* string,int weight,int limit,int pre){
  */
 judgeAndRes addString(char* string, pfEntry pf){
     judgeAndRes  *andRes=RedisModule_Calloc(1,sizeof(*andRes));
-    bool isBig=pf.isBigData;//如果是大数据情况，实际的位置将从有效层开始
-    sliceChain* chain=pf.slicechain; // 这里可以得到大数据情况对应的最低层
-    int lowestLayer=chain->initLayer;
     judgeAndintArr judgeArr=calEleLocal(string,pf.weight,pf.high,pf.conflictP);
     if (judgeArr.succ==true){
         Queue *pos=judgeArr.pos;
-
-
+        bool succ=trySet(pos,pf,true);
+        if (succ==false){
+            andRes->judge=false;
+            andRes->descrip="存在冲突";
+        }else{andRes->judge=true;}
     }else{
         andRes->judge=false;
         andRes->descrip=judgeArr.descrip;
@@ -84,10 +84,28 @@ judgeAndRes addString(char* string, pfEntry pf){
     return *andRes;
 }
 
-void delString(char* string,pfEntry pf){
-
+judgeAndRes delString(char* string,pfEntry pf){
+    judgeAndRes  *andRes=RedisModule_Calloc(1,sizeof(*andRes));
+    judgeAndintArr judgeArr=calEleLocal(string,pf.weight,pf.high,pf.conflictP);
+    if (judgeArr.succ==true){
+        Queue *pos=judgeArr.pos;
+        bool succ=trySet(pos,pf,false);
+        if (succ==false){
+            andRes->judge=false;
+            andRes->descrip="不存在对应元素";
+        }else{
+            andRes->judge=true;
+        }
+    }else{
+        andRes->judge=false;
+        andRes->descrip=judgeArr.descrip;
+    }
+    return *andRes;
 }
 
 bool judgeString(char* string,pfEntry pf){
-
+    judgeAndintArr judgeArr=calEleLocal(string,pf.weight,pf.high,pf.conflictP);
+    if (judgeArr.succ==true){
+        return judgeConflict(judgeArr.pos,pf);
+    }else return false;
 }

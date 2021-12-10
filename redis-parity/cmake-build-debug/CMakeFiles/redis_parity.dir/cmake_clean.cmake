@@ -1,10 +1,13 @@
 file(REMOVE_RECURSE
   "CMakeFiles/redis_parity.dir/library.c.obj"
+  "CMakeFiles/redis_parity.dir/src/bash.c.obj"
   "CMakeFiles/redis_parity.dir/src/bitOp.c.obj"
   "CMakeFiles/redis_parity.dir/src/filter.c.obj"
+  "CMakeFiles/redis_parity.dir/src/filterInit.c.obj"
   "CMakeFiles/redis_parity.dir/src/parity.c.obj"
   "CMakeFiles/redis_parity.dir/src/parityHash.c.obj"
   "CMakeFiles/redis_parity.dir/src/queue.c.obj"
+  "CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.obj"
   "libredis_parity.dll"
   "libredis_parity.dll.a"
   "libredis_parity.dll.manifest"

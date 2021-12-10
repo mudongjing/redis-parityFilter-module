@@ -3,4 +3,4 @@ project(redis_parity C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_library(redis_parity SHARED library.c library.h src/parity.h src/parity.c src/bitOp.c src/bitOp.h src/filter.c src/parityHash.c src/parityHash.h src/base.h src/queue.h src/queue.c)
+add_library(redis_parity SHARED library.c library.h src/parity.h src/parity.c src/bitOp.c src/bitOp.h src/filter.c src/parityHash.c src/parityHash.h src/base.h src/queue.h src/queue.c src/sliceAndPfOp.c src/sliceAndPfOp.h src/filterInit.c src/filterInit.h src/bash.c)

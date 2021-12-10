@@ -5,11 +5,14 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
   "E:/Documents/code/redis-module/redis-parity/library.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/library.c.obj"
+  "E:/Documents/code/redis-module/redis-parity/src/bash.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/src/bash.c.obj"
   "E:/Documents/code/redis-module/redis-parity/src/bitOp.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/src/bitOp.c.obj"
   "E:/Documents/code/redis-module/redis-parity/src/filter.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/src/filter.c.obj"
+  "E:/Documents/code/redis-module/redis-parity/src/filterInit.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/src/filterInit.c.obj"
   "E:/Documents/code/redis-module/redis-parity/src/parity.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/src/parity.c.obj"
   "E:/Documents/code/redis-module/redis-parity/src/parityHash.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/src/parityHash.c.obj"
   "E:/Documents/code/redis-module/redis-parity/src/queue.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/src/queue.c.obj"
+  "E:/Documents/code/redis-module/redis-parity/src/sliceAndPfOp.c" "E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -149,6 +149,33 @@ library.c.s:
 	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/library.c.s
 .PHONY : library.c.s
 
+src/bash.obj: src/bash.c.obj
+
+.PHONY : src/bash.obj
+
+# target to build an object file
+src/bash.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bash.c.obj
+.PHONY : src/bash.c.obj
+
+src/bash.i: src/bash.c.i
+
+.PHONY : src/bash.i
+
+# target to preprocess a source file
+src/bash.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bash.c.i
+.PHONY : src/bash.c.i
+
+src/bash.s: src/bash.c.s
+
+.PHONY : src/bash.s
+
+# target to generate assembly for a file
+src/bash.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bash.c.s
+.PHONY : src/bash.c.s
+
 src/bitOp.obj: src/bitOp.c.obj
 
 .PHONY : src/bitOp.obj
@@ -202,6 +229,33 @@ src/filter.s: src/filter.c.s
 src/filter.c.s:
 	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/filter.c.s
 .PHONY : src/filter.c.s
+
+src/filterInit.obj: src/filterInit.c.obj
+
+.PHONY : src/filterInit.obj
+
+# target to build an object file
+src/filterInit.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/filterInit.c.obj
+.PHONY : src/filterInit.c.obj
+
+src/filterInit.i: src/filterInit.c.i
+
+.PHONY : src/filterInit.i
+
+# target to preprocess a source file
+src/filterInit.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/filterInit.c.i
+.PHONY : src/filterInit.c.i
+
+src/filterInit.s: src/filterInit.c.s
+
+.PHONY : src/filterInit.s
+
+# target to generate assembly for a file
+src/filterInit.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/filterInit.c.s
+.PHONY : src/filterInit.c.s
 
 src/parity.obj: src/parity.c.obj
 
@@ -284,6 +338,33 @@ src/queue.c.s:
 	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/queue.c.s
 .PHONY : src/queue.c.s
 
+src/sliceAndPfOp.obj: src/sliceAndPfOp.c.obj
+
+.PHONY : src/sliceAndPfOp.obj
+
+# target to build an object file
+src/sliceAndPfOp.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.obj
+.PHONY : src/sliceAndPfOp.c.obj
+
+src/sliceAndPfOp.i: src/sliceAndPfOp.c.i
+
+.PHONY : src/sliceAndPfOp.i
+
+# target to preprocess a source file
+src/sliceAndPfOp.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.i
+.PHONY : src/sliceAndPfOp.c.i
+
+src/sliceAndPfOp.s: src/sliceAndPfOp.c.s
+
+.PHONY : src/sliceAndPfOp.s
+
+# target to generate assembly for a file
+src/sliceAndPfOp.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.s
+.PHONY : src/sliceAndPfOp.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -296,12 +377,18 @@ help:
 	@echo ... library.obj
 	@echo ... library.i
 	@echo ... library.s
+	@echo ... src/bash.obj
+	@echo ... src/bash.i
+	@echo ... src/bash.s
 	@echo ... src/bitOp.obj
 	@echo ... src/bitOp.i
 	@echo ... src/bitOp.s
 	@echo ... src/filter.obj
 	@echo ... src/filter.i
 	@echo ... src/filter.s
+	@echo ... src/filterInit.obj
+	@echo ... src/filterInit.i
+	@echo ... src/filterInit.s
 	@echo ... src/parity.obj
 	@echo ... src/parity.i
 	@echo ... src/parity.s
@@ -311,6 +398,9 @@ help:
 	@echo ... src/queue.obj
 	@echo ... src/queue.i
 	@echo ... src/queue.s
+	@echo ... src/sliceAndPfOp.obj
+	@echo ... src/sliceAndPfOp.i
+	@echo ... src/sliceAndPfOp.s
 .PHONY : help
 
 

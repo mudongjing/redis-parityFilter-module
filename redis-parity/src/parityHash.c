@@ -63,7 +63,7 @@ bool setOrJudge(Queue *pos,pfEntry pf,bool set){
     }
     int maxEffStopLayer=minEffStopLayer+chainSize-1;
     QNode* node=pos->front;
-    if (isBig){
+    if (isBig==true){
         int tmp=0;
         while(tmp<minEffStopLayer){
             node=node->next;

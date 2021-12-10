@@ -16,6 +16,6 @@
 
 judgeAndRes addString(char* string, pfEntry pf);
 
-void delString(char* string,pfEntry pf);
+judgeAndRes delString(char* string,pfEntry pf);
 
 bool judgeString(char* string,pfEntry pf);

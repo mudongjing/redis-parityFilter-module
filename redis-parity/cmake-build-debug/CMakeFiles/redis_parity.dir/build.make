@@ -134,6 +134,45 @@ CMakeFiles/redis_parity.dir/src/queue.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/redis_parity.dir/src/queue.c.s"
 	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\Documents\code\redis-module\redis-parity\src\queue.c -o CMakeFiles\redis_parity.dir\src\queue.c.s
 
+CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.obj: CMakeFiles/redis_parity.dir/flags.make
+CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.obj: ../src/sliceAndPfOp.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Documents\code\redis-module\redis-parity\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.obj"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\redis_parity.dir\src\sliceAndPfOp.c.obj   -c E:\Documents\code\redis-module\redis-parity\src\sliceAndPfOp.c
+
+CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.i"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\Documents\code\redis-module\redis-parity\src\sliceAndPfOp.c > CMakeFiles\redis_parity.dir\src\sliceAndPfOp.c.i
+
+CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.s"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\Documents\code\redis-module\redis-parity\src\sliceAndPfOp.c -o CMakeFiles\redis_parity.dir\src\sliceAndPfOp.c.s
+
+CMakeFiles/redis_parity.dir/src/filterInit.c.obj: CMakeFiles/redis_parity.dir/flags.make
+CMakeFiles/redis_parity.dir/src/filterInit.c.obj: ../src/filterInit.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Documents\code\redis-module\redis-parity\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/redis_parity.dir/src/filterInit.c.obj"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\redis_parity.dir\src\filterInit.c.obj   -c E:\Documents\code\redis-module\redis-parity\src\filterInit.c
+
+CMakeFiles/redis_parity.dir/src/filterInit.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/redis_parity.dir/src/filterInit.c.i"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\Documents\code\redis-module\redis-parity\src\filterInit.c > CMakeFiles\redis_parity.dir\src\filterInit.c.i
+
+CMakeFiles/redis_parity.dir/src/filterInit.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/redis_parity.dir/src/filterInit.c.s"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\Documents\code\redis-module\redis-parity\src\filterInit.c -o CMakeFiles\redis_parity.dir\src\filterInit.c.s
+
+CMakeFiles/redis_parity.dir/src/bash.c.obj: CMakeFiles/redis_parity.dir/flags.make
+CMakeFiles/redis_parity.dir/src/bash.c.obj: ../src/bash.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Documents\code\redis-module\redis-parity\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/redis_parity.dir/src/bash.c.obj"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\redis_parity.dir\src\bash.c.obj   -c E:\Documents\code\redis-module\redis-parity\src\bash.c
+
+CMakeFiles/redis_parity.dir/src/bash.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/redis_parity.dir/src/bash.c.i"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\Documents\code\redis-module\redis-parity\src\bash.c > CMakeFiles\redis_parity.dir\src\bash.c.i
+
+CMakeFiles/redis_parity.dir/src/bash.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/redis_parity.dir/src/bash.c.s"
+	D:\Git\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\Documents\code\redis-module\redis-parity\src\bash.c -o CMakeFiles\redis_parity.dir\src\bash.c.s
+
 # Object files for target redis_parity
 redis_parity_OBJECTS = \
 "CMakeFiles/redis_parity.dir/library.c.obj" \
@@ -141,7 +180,10 @@ redis_parity_OBJECTS = \
 "CMakeFiles/redis_parity.dir/src/bitOp.c.obj" \
 "CMakeFiles/redis_parity.dir/src/filter.c.obj" \
 "CMakeFiles/redis_parity.dir/src/parityHash.c.obj" \
-"CMakeFiles/redis_parity.dir/src/queue.c.obj"
+"CMakeFiles/redis_parity.dir/src/queue.c.obj" \
+"CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.obj" \
+"CMakeFiles/redis_parity.dir/src/filterInit.c.obj" \
+"CMakeFiles/redis_parity.dir/src/bash.c.obj"
 
 # External object files for target redis_parity
 redis_parity_EXTERNAL_OBJECTS =
@@ -152,11 +194,14 @@ libredis_parity.dll: CMakeFiles/redis_parity.dir/src/bitOp.c.obj
 libredis_parity.dll: CMakeFiles/redis_parity.dir/src/filter.c.obj
 libredis_parity.dll: CMakeFiles/redis_parity.dir/src/parityHash.c.obj
 libredis_parity.dll: CMakeFiles/redis_parity.dir/src/queue.c.obj
+libredis_parity.dll: CMakeFiles/redis_parity.dir/src/sliceAndPfOp.c.obj
+libredis_parity.dll: CMakeFiles/redis_parity.dir/src/filterInit.c.obj
+libredis_parity.dll: CMakeFiles/redis_parity.dir/src/bash.c.obj
 libredis_parity.dll: CMakeFiles/redis_parity.dir/build.make
 libredis_parity.dll: CMakeFiles/redis_parity.dir/linklibs.rsp
 libredis_parity.dll: CMakeFiles/redis_parity.dir/objects1.rsp
 libredis_parity.dll: CMakeFiles/redis_parity.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\Documents\code\redis-module\redis-parity\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C shared library libredis_parity.dll"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\Documents\code\redis-module\redis-parity\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C shared library libredis_parity.dll"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\redis_parity.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -17,4 +17,4 @@
 // 最大的高度不超过 2^7
 
 
-pfEntry initFilter(int conflict);
+pfEntry* initFilter(int conflict);

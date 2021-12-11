@@ -14,7 +14,7 @@ pair getPAndW(int conflict){
     }else if (conflict<=39 && conflict>=21){
         res->p=3;
         res->count=conflict-6-3;
-        res->hight=32
+        res->hight=32;
     }else if (conflict<=20 && conflict>=17){
         res->p=2;
         res->count=conflict-4-3;
@@ -22,7 +22,7 @@ pair getPAndW(int conflict){
     } else if (conflict==16){
         res->p=1;
         res->count=conflict-2-3;
-        res->hight=8
+        res->hight=8;
     }else if (conflict>=13){
         res->copy=false;
         res->p=3;

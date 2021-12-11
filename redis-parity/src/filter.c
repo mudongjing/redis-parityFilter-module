@@ -2,6 +2,7 @@
 // Created by dongmu on 21.12.6.
 //
 #include "redismodule.h"
+#include <stdlib.h>
 /*
  * 综合已有的方法，实现元素的插入和删除，以及判断。
  * 并将对应的方法对应到redis的命令，实现模块的注册。
@@ -17,3 +18,8 @@
  * 位图的初始化一般是对着元素的加入而不断扩大，而大数据条件，则是直接生成对应的格式。
  */
 
+
+
+int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc){
+
+}

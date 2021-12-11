@@ -13,14 +13,24 @@ char* initChar(int weight){
     memset(s,'\0',weight);
     return s;
 }
-bitMap initBitMap(int pre,int count){
+bitMap initBitMap(int high,int pre,int count,bool isBig){
     bitMap *bitmap=RedisModule_Calloc(1,sizeof(bitmap));
-    for (int i = 0; i < pre+2; ++i) {
-        char* content=RedisModule_Calloc(1,count);
-        memset(content,'\0',count);
-        bitmap->oneChar[i]=content;
+    bitmap->oneChar=RedisModule_Calloc(high,sizeof(void*));
+    if (isBig==true){
+        int tpre=1<<pre;
+        for (int i = 0; i < tpre; ++i) {
+            bitmap->oneChar[i]=NULL;
+        }
+        bitmap->oneChar[tpre]=initChar(count);
+        bitmap->effcLen=tpre+1;
+    }else{
+        bitmap->oneChar=RedisModule_Calloc(pre+2,sizeof(void*));
+        for (int i = 0; i < pre+2; ++i) {
+            bitmap->oneChar[i]=initChar(count);
+        }
+        bitmap->effcLen=pre+2;
     }
-    bitmap->effcLen=pre+2;
+
     return *bitmap;
 }
 sliceBitMap * initSliceMap(int weight){
@@ -37,55 +47,52 @@ sliceBitMapArray * initSliceArray(int layer,int len,int weight){
     array->layer=layer;
     array->len=len;
     array->lastWeight=weight<<1;
+    array->slice=RedisModule_Calloc(len,sizeof(void*));
     for (int i = 0; i < len; ++i) {
         array->slice[i]=initSliceMap(weight);
     }
 }
-sliceChain initSliceChain(int initLayer,int len,int weight){
+sliceChain* initSliceChain(int initLayer,int len,int weight){
     sliceChain *chain=RedisModule_Calloc(1,sizeof(chain));
     chain->initLayer=initLayer;
     chain->len=len;
+    chain->sliceArray=RedisModule_Calloc(len,sizeof(void*));
     for (int i = 0; i < len; ++i) {
         chain->sliceArray[i]=initSliceArray(initLayer+i,len,weight);
     }
-    return *chain;
+    return chain;
 }
-pfEntry  initPfEntry(int pre,int count,int high,bool isBig){
+pfEntry*  initPfEntry(int pre,int count,int high,bool isBig){
     pfEntry *pf=RedisModule_Calloc(1,sizeof(pf));
     pf->conflictP=pre;
     pf->weight=count;
     pf->high=high;
     pf->isBigData=isBig;
-    if (isBig==true) pf->layerStartStop=0;
-    else pf->layerStartStop=pre+1;
 
-    pf->mainBitMap=initBitMap(pre,count);
-    pf->pureBitMap=initBitMap(pre,count);
-    pf->stopBitMap=initBitMap(pre,count);
-    pf->lastBitMap=initBitMap(pre,count<<1);
+    pf->mainBitMap=initBitMap(high,pre,count,isBig);
+    pf->pureBitMap=initBitMap(high,pre,count,isBig);
+    pf->stopBitMap=initBitMap(high,pre,count,isBig);
+    pf->lastBitMap=initBitMap(high,pre,count<<1,isBig);
     pf->effLen=pre+2;
 
+    if (isBig==true) {
+        pf->layerStartStop=0;
+        pf->slicechain=initSliceChain(pre+1,1<<pre,count);
+    }
+    else {
+        pf->layerStartStop=pre+1;
+    }
 
-    return *pf;
+    return pf;
 }
 //
-pfEntry initFilter(int conflict){
-    pfEntry *pf = NULL;
+pfEntry* initFilter(int conflict){
+    pfEntry* pf = NULL;
     // 太大或较小都不打算支持
-    if (conflict>CONFLICT_LIMIT || conflict<13) return *pf;
+    if (conflict>CONFLICT_LIMIT || conflict<13) return pf;
+
     pair wpb=getPAndW(conflict);
-    pf = RedisModule_Calloc(1,sizeof(pf));
-    pf->isBigData=false;
+    pf = initPfEntry(wpb.p,wpb.count,wpb.hight,wpb.copy);
 
-
-    bitMap *main=RedisModule_Calloc(1,sizeof(main));
-    bitMap *pure=RedisModule_Calloc(1,sizeof(pure));
-    bitMap *stop=RedisModule_Calloc(1,sizeof(stop));
-    bitMap *last=RedisModule_Calloc(1,sizeof(last));
-
-    if (conflict>=BIGDATA_SIZE){
-        pf->isBigData=true;
-    }else{
-
-    }
+    return pf;
 }

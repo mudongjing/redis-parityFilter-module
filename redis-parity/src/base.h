@@ -30,7 +30,7 @@ typedef struct JudgeAndRes{
 typedef struct bitMap{
     uint32_t effcLen;//有效长度，指一维数组，其中的char*还未实际定义，就是实际有效的高度
     // 维度由所属的过滤器决定
-    char* oneChar[];//字符数组指针数组
+    char* *oneChar;//字符数组指针数组
 }bitMap;
 
 /**
@@ -54,14 +54,14 @@ typedef struct sliceBitMapArray{
     uint32_t layer;//对应的层数
     uint32_t len; // 副本数量
     uint32_t lastWeight; // last bitMap对应的宽度 ，主要是后面的编程用的频繁，就额外定义
-    sliceBitMap* slice[];
+    sliceBitMap* *slice;
 }sliceBitMapArray;
 
 // 副本链的作用是，存储几个低层对应的sliceBitMapArray
 typedef struct sliceChain{
     uint32_t initLayer;//负责的最低层数
     uint32_t len;//包含的层数
-    sliceBitMapArray* sliceArray[];//不同层对应的副本组的指针数组
+    sliceBitMapArray* *sliceArray;//不同层对应的副本组的指针数组
 }sliceChain;
 
 

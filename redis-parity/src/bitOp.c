@@ -13,7 +13,7 @@
 
 // 给位图增高
 static void expanBitMap(bitMap bitmap,int targetLayer){
-    int len=strlen(bitmap.oneChar[0]);
+    int len=sizeof(bitmap.oneChar[0]);
     while (bitmap.effcLen<=targetLayer){
         char* p=RedisModule_Calloc(1,sizeof(len*sizeof(char)));
         bitmap.oneChar[bitmap.effcLen++]=p;

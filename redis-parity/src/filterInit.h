@@ -2,7 +2,7 @@
 // Created by dongmu on 21.12.9.
 //
 
-#include "base.h"
+#include "assist/base.h"
 
 #ifndef REDIS_PARITY_FILTERINIT_H
 #define REDIS_PARITY_FILTERINIT_H

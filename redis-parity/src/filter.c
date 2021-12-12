@@ -3,23 +3,78 @@
 //
 #include "redismodule.h"
 #include <stdlib.h>
-/*
- * 综合已有的方法，实现元素的插入和删除，以及判断。
- * 并将对应的方法对应到redis的命令，实现模块的注册。
- *
- * 在初始化时，只需要一个大致的元素数量，和一个允许的冲突概率，以及是否视为大数据项目。
- * 元素数量，将决定初始的一个位图的规模，冲突概率将决定在原有的基础上增加多少空间。
- * 而视为大数据的情况，则是对于较低层的元素在大量数据冲击下将没有参考价值可以省略，在计算期间可以减少前面几次的数值比较。
- *
- * 在处理冲突功率时，考虑的是位图最底层的停留点具有的冲突概率，（越向上，冲突概率越低）
- * 只需要满足几个底层的冲突概率符合即可。
- * 我们的做法，是将几个底层复制出几份，当一个出现停留冲突，可以进一步的判断最后的一次计算数值，
- * 当前位图的宽度就是可以复制的最大数量，以此同一计算实际我们需要的前缀计算次数，以及最低成本的宽度。
- * 位图的初始化一般是对着元素的加入而不断扩大，而大数据条件，则是直接生成对应的格式。
- */
+#include "persist/persist.h"
+#include "keyAddAndDelOp.h"
 
 
+static int PFAdd_RedisCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc){
+    return addKeyAndValue(ctx,argv,argc);
+}
+static int PFDel_RedisCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc){
+    return delKey(ctx,argv,argc);
+}
+static bool PFJudge_RedisCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc){
+    return checkValueInKey(ctx,argv,argc);
+}
+
+static void freeBitMap(bitMap bitmap){
+    for (int i = 0; i < bitmap.effcLen; ++i) {
+        RedisModule_Free(bitmap.oneChar[i]);
+    }
+    RedisModule_Free(&bitmap);
+}
+static void freeChain(sliceChain* chain){
+    for (int i = 0; i < chain->len; ++i) {
+        sliceBitMapArray*  array=chain->sliceArray[i];
+        for (int j = 0; j < array->len; ++j) {
+            sliceBitMap * slice=array->slice[j];
+            RedisModule_Free(slice->mainBitMap);
+            RedisModule_Free(slice->pureBitMap);
+            RedisModule_Free(slice->stopBitMap);
+            RedisModule_Free(slice->lastBitMap);
+        }
+        RedisModule_Free(array);
+    }
+    RedisModule_Free(chain);
+}
+static void PFFree(void* value) {
+    pfEntry *pf=value;
+    freeBitMap(pf->mainBitMap);
+    freeBitMap(pf->pureBitMap);
+    freeBitMap(pf->stopBitMap);
+    freeBitMap(pf->lastBitMap);
+    freeChain(pf->slicechain);
+    RedisModule_Free(pf);
+}
 
 int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc){
+    if (RedisModule_Init(ctx, "pfliter", 1, REDISMODULE_APIVER_1) !=
+        REDISMODULE_OK) {
+        return REDISMODULE_ERR;
+    }
 
+
+#define CREATE_CMD(name, tgt, attr)                                                                \
+    do {                                                                                           \
+        if (RedisModule_CreateCommand(ctx, name, tgt, attr, 1, 1, 1) != REDISMODULE_OK) {          \
+            return REDISMODULE_ERR;                                                                \
+        }                                                                                          \
+    } while (0)
+#define CREATE_WRCMD(name, tgt) CREATE_CMD(name, tgt, "write deny-oom")
+#define CREATE_ROCMD(name, tgt) CREATE_CMD(name, tgt, "readonly fast")
+    CREATE_WRCMD("PF.ADD", PFAdd_RedisCommand);
+    CREATE_WRCMD("PF.DEL", PFDel_RedisCommand);
+    CREATE_WRCMD("PF.EXIST", PFJudge_RedisCommand);
+
+
+    static RedisModuleTypeMethods typeprocs = {.version = REDISMODULE_TYPE_METHOD_VERSION,
+            .rdb_load = PFRdbLoad,
+            .rdb_save = PFRdbSave,
+            .aof_rewrite = PFAofRewrite,
+            .free = PFFree,
+            .mem_usage = PFMemUsage};
+    PFType = RedisModule_CreateDataType(ctx, "parityFli", 1, &typeprocs);
+    if (PFType == NULL) {
+        return REDISMODULE_ERR;
+    }
 }

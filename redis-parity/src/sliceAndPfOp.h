@@ -1,8 +1,8 @@
 //
 // Created by dongmu on 21.12.9.
 //
-#include "queue.h"
-#include "bitOp.h"
+#include "assist/queue.h"
+#include "assist/bitOp.h"
 #ifndef REDIS_PARITY_SLICEANDPFOP_H
 #define REDIS_PARITY_SLICEANDPFOP_H
 

@@ -15,3 +15,5 @@ static int getKey(RedisModuleKey *key,RedisModuleType *expType,pfEntry* pf);
 static int addKeyAndValue(RedisModuleCtx *ctx,RedisModuleString **argv,int argc);
 static int delKey(RedisModuleCtx *ctx,RedisModuleString **argv,int argc);
 static bool checkValueInKey(RedisModuleCtx *ctx,RedisModuleString **argv,int argc);
+
+static void loadAof(RedisModuleCtx *ctx,RedisModuleString **argv,int argc);

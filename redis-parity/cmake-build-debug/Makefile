@@ -149,59 +149,140 @@ library.c.s:
 	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/library.c.s
 .PHONY : library.c.s
 
-src/bash.obj: src/bash.c.obj
+src/assist/bash.obj: src/assist/bash.c.obj
 
-.PHONY : src/bash.obj
-
-# target to build an object file
-src/bash.c.obj:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bash.c.obj
-.PHONY : src/bash.c.obj
-
-src/bash.i: src/bash.c.i
-
-.PHONY : src/bash.i
-
-# target to preprocess a source file
-src/bash.c.i:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bash.c.i
-.PHONY : src/bash.c.i
-
-src/bash.s: src/bash.c.s
-
-.PHONY : src/bash.s
-
-# target to generate assembly for a file
-src/bash.c.s:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bash.c.s
-.PHONY : src/bash.c.s
-
-src/bitOp.obj: src/bitOp.c.obj
-
-.PHONY : src/bitOp.obj
+.PHONY : src/assist/bash.obj
 
 # target to build an object file
-src/bitOp.c.obj:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bitOp.c.obj
-.PHONY : src/bitOp.c.obj
+src/assist/bash.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/bash.c.obj
+.PHONY : src/assist/bash.c.obj
 
-src/bitOp.i: src/bitOp.c.i
+src/assist/bash.i: src/assist/bash.c.i
 
-.PHONY : src/bitOp.i
+.PHONY : src/assist/bash.i
 
 # target to preprocess a source file
-src/bitOp.c.i:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bitOp.c.i
-.PHONY : src/bitOp.c.i
+src/assist/bash.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/bash.c.i
+.PHONY : src/assist/bash.c.i
 
-src/bitOp.s: src/bitOp.c.s
+src/assist/bash.s: src/assist/bash.c.s
 
-.PHONY : src/bitOp.s
+.PHONY : src/assist/bash.s
 
 # target to generate assembly for a file
-src/bitOp.c.s:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/bitOp.c.s
-.PHONY : src/bitOp.c.s
+src/assist/bash.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/bash.c.s
+.PHONY : src/assist/bash.c.s
+
+src/assist/bitOp.obj: src/assist/bitOp.c.obj
+
+.PHONY : src/assist/bitOp.obj
+
+# target to build an object file
+src/assist/bitOp.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/bitOp.c.obj
+.PHONY : src/assist/bitOp.c.obj
+
+src/assist/bitOp.i: src/assist/bitOp.c.i
+
+.PHONY : src/assist/bitOp.i
+
+# target to preprocess a source file
+src/assist/bitOp.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/bitOp.c.i
+.PHONY : src/assist/bitOp.c.i
+
+src/assist/bitOp.s: src/assist/bitOp.c.s
+
+.PHONY : src/assist/bitOp.s
+
+# target to generate assembly for a file
+src/assist/bitOp.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/bitOp.c.s
+.PHONY : src/assist/bitOp.c.s
+
+src/assist/parity.obj: src/assist/parity.c.obj
+
+.PHONY : src/assist/parity.obj
+
+# target to build an object file
+src/assist/parity.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/parity.c.obj
+.PHONY : src/assist/parity.c.obj
+
+src/assist/parity.i: src/assist/parity.c.i
+
+.PHONY : src/assist/parity.i
+
+# target to preprocess a source file
+src/assist/parity.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/parity.c.i
+.PHONY : src/assist/parity.c.i
+
+src/assist/parity.s: src/assist/parity.c.s
+
+.PHONY : src/assist/parity.s
+
+# target to generate assembly for a file
+src/assist/parity.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/parity.c.s
+.PHONY : src/assist/parity.c.s
+
+src/assist/parityHash.obj: src/assist/parityHash.c.obj
+
+.PHONY : src/assist/parityHash.obj
+
+# target to build an object file
+src/assist/parityHash.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/parityHash.c.obj
+.PHONY : src/assist/parityHash.c.obj
+
+src/assist/parityHash.i: src/assist/parityHash.c.i
+
+.PHONY : src/assist/parityHash.i
+
+# target to preprocess a source file
+src/assist/parityHash.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/parityHash.c.i
+.PHONY : src/assist/parityHash.c.i
+
+src/assist/parityHash.s: src/assist/parityHash.c.s
+
+.PHONY : src/assist/parityHash.s
+
+# target to generate assembly for a file
+src/assist/parityHash.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/parityHash.c.s
+.PHONY : src/assist/parityHash.c.s
+
+src/assist/queue.obj: src/assist/queue.c.obj
+
+.PHONY : src/assist/queue.obj
+
+# target to build an object file
+src/assist/queue.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/queue.c.obj
+.PHONY : src/assist/queue.c.obj
+
+src/assist/queue.i: src/assist/queue.c.i
+
+.PHONY : src/assist/queue.i
+
+# target to preprocess a source file
+src/assist/queue.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/queue.c.i
+.PHONY : src/assist/queue.c.i
+
+src/assist/queue.s: src/assist/queue.c.s
+
+.PHONY : src/assist/queue.s
+
+# target to generate assembly for a file
+src/assist/queue.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/assist/queue.c.s
+.PHONY : src/assist/queue.c.s
 
 src/filter.obj: src/filter.c.obj
 
@@ -257,86 +338,59 @@ src/filterInit.c.s:
 	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/filterInit.c.s
 .PHONY : src/filterInit.c.s
 
-src/parity.obj: src/parity.c.obj
+src/keyAddAndDelOp.obj: src/keyAddAndDelOp.c.obj
 
-.PHONY : src/parity.obj
-
-# target to build an object file
-src/parity.c.obj:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/parity.c.obj
-.PHONY : src/parity.c.obj
-
-src/parity.i: src/parity.c.i
-
-.PHONY : src/parity.i
-
-# target to preprocess a source file
-src/parity.c.i:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/parity.c.i
-.PHONY : src/parity.c.i
-
-src/parity.s: src/parity.c.s
-
-.PHONY : src/parity.s
-
-# target to generate assembly for a file
-src/parity.c.s:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/parity.c.s
-.PHONY : src/parity.c.s
-
-src/parityHash.obj: src/parityHash.c.obj
-
-.PHONY : src/parityHash.obj
+.PHONY : src/keyAddAndDelOp.obj
 
 # target to build an object file
-src/parityHash.c.obj:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/parityHash.c.obj
-.PHONY : src/parityHash.c.obj
+src/keyAddAndDelOp.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/keyAddAndDelOp.c.obj
+.PHONY : src/keyAddAndDelOp.c.obj
 
-src/parityHash.i: src/parityHash.c.i
+src/keyAddAndDelOp.i: src/keyAddAndDelOp.c.i
 
-.PHONY : src/parityHash.i
+.PHONY : src/keyAddAndDelOp.i
 
 # target to preprocess a source file
-src/parityHash.c.i:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/parityHash.c.i
-.PHONY : src/parityHash.c.i
+src/keyAddAndDelOp.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/keyAddAndDelOp.c.i
+.PHONY : src/keyAddAndDelOp.c.i
 
-src/parityHash.s: src/parityHash.c.s
+src/keyAddAndDelOp.s: src/keyAddAndDelOp.c.s
 
-.PHONY : src/parityHash.s
+.PHONY : src/keyAddAndDelOp.s
 
 # target to generate assembly for a file
-src/parityHash.c.s:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/parityHash.c.s
-.PHONY : src/parityHash.c.s
+src/keyAddAndDelOp.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/keyAddAndDelOp.c.s
+.PHONY : src/keyAddAndDelOp.c.s
 
-src/queue.obj: src/queue.c.obj
+src/persist/persist.obj: src/persist/persist.c.obj
 
-.PHONY : src/queue.obj
+.PHONY : src/persist/persist.obj
 
 # target to build an object file
-src/queue.c.obj:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/queue.c.obj
-.PHONY : src/queue.c.obj
+src/persist/persist.c.obj:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/persist/persist.c.obj
+.PHONY : src/persist/persist.c.obj
 
-src/queue.i: src/queue.c.i
+src/persist/persist.i: src/persist/persist.c.i
 
-.PHONY : src/queue.i
+.PHONY : src/persist/persist.i
 
 # target to preprocess a source file
-src/queue.c.i:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/queue.c.i
-.PHONY : src/queue.c.i
+src/persist/persist.c.i:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/persist/persist.c.i
+.PHONY : src/persist/persist.c.i
 
-src/queue.s: src/queue.c.s
+src/persist/persist.s: src/persist/persist.c.s
 
-.PHONY : src/queue.s
+.PHONY : src/persist/persist.s
 
 # target to generate assembly for a file
-src/queue.c.s:
-	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/queue.c.s
-.PHONY : src/queue.c.s
+src/persist/persist.c.s:
+	$(MAKE) -f CMakeFiles\redis_parity.dir\build.make CMakeFiles/redis_parity.dir/src/persist/persist.c.s
+.PHONY : src/persist/persist.c.s
 
 src/sliceAndPfOp.obj: src/sliceAndPfOp.c.obj
 
@@ -377,27 +431,33 @@ help:
 	@echo ... library.obj
 	@echo ... library.i
 	@echo ... library.s
-	@echo ... src/bash.obj
-	@echo ... src/bash.i
-	@echo ... src/bash.s
-	@echo ... src/bitOp.obj
-	@echo ... src/bitOp.i
-	@echo ... src/bitOp.s
+	@echo ... src/assist/bash.obj
+	@echo ... src/assist/bash.i
+	@echo ... src/assist/bash.s
+	@echo ... src/assist/bitOp.obj
+	@echo ... src/assist/bitOp.i
+	@echo ... src/assist/bitOp.s
+	@echo ... src/assist/parity.obj
+	@echo ... src/assist/parity.i
+	@echo ... src/assist/parity.s
+	@echo ... src/assist/parityHash.obj
+	@echo ... src/assist/parityHash.i
+	@echo ... src/assist/parityHash.s
+	@echo ... src/assist/queue.obj
+	@echo ... src/assist/queue.i
+	@echo ... src/assist/queue.s
 	@echo ... src/filter.obj
 	@echo ... src/filter.i
 	@echo ... src/filter.s
 	@echo ... src/filterInit.obj
 	@echo ... src/filterInit.i
 	@echo ... src/filterInit.s
-	@echo ... src/parity.obj
-	@echo ... src/parity.i
-	@echo ... src/parity.s
-	@echo ... src/parityHash.obj
-	@echo ... src/parityHash.i
-	@echo ... src/parityHash.s
-	@echo ... src/queue.obj
-	@echo ... src/queue.i
-	@echo ... src/queue.s
+	@echo ... src/keyAddAndDelOp.obj
+	@echo ... src/keyAddAndDelOp.i
+	@echo ... src/keyAddAndDelOp.s
+	@echo ... src/persist/persist.obj
+	@echo ... src/persist/persist.i
+	@echo ... src/persist/persist.s
 	@echo ... src/sliceAndPfOp.obj
 	@echo ... src/sliceAndPfOp.i
 	@echo ... src/sliceAndPfOp.s

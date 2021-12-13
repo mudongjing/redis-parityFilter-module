@@ -105,9 +105,71 @@ static void PFRdbSave(RedisModuleIO *io, void *obj){
     }
 }
 
+
+static void bitmapCopy(packBitMap pb,bitMap bp,int high,int weight,int efflen){
+    pb.effcLen=bp.effcLen;
+    for (int i = 0; i < high; ++i) {
+        if (i<efflen){
+            char* s=malloc(weight);
+            *s=*bp.oneChar[i];
+            pb.oneChar[i]=s;
+        } else pb.oneChar[i]=NULL;
+    }
+}
+static char* pfEntryHeader(const pfEntry* pf,size_t *len){
+    *len=sizeof(pfChainHeader)+
+            sizeof(packBitMap)*4 + sizeof(char*)*pf->high*4 + sizeof(char)*pf->weight*pf->effLen*3 +
+            sizeof(char)*pf->weight*2*pf->effLen ;
+    if (pf->slicechain != NULL){
+        *len += sizeof(packSliceChain) + (sizeof(void*) + sizeof(packSliceBitMapArray))*pf->slicechain->len +
+                pf->slicechain->len*pf->slicechain[0].len*(sizeof(void*)+
+                sizeof(packSliceBitMap)+pf->slicechain->sliceArray[0]->slice[0]->weight*5*sizeof(char));
+    }
+    pfChainHeader * header=calloc(1,*len);
+    header->isBigData=pf->isBigData;
+    header->conflictP=pf->conflictP;
+    header->layerStartStop=pf->layerStartStop;
+    header->high=pf->high;
+    header->weight=pf->weight;
+    header->effLen=pf->effLen;
+    bitmapCopy(header->mainBitMap,pf->mainBitMap,pf->high,pf->weight,pf->effLen);
+    bitmapCopy(header->pureBitMap,pf->pureBitMap,pf->high,pf->weight,pf->effLen);
+    bitmapCopy(header->stopBitMap,pf->stopBitMap,pf->high,pf->weight,pf->effLen);
+    bitmapCopy(header->lastBitMap,pf->lastBitMap,pf->high,pf->weight*2,pf->effLen);
+    header->slicechain->initLayer=pf->slicechain->initLayer;
+    header->slicechain->len=pf->slicechain->len;
+    for (int i = 0; i < pf->slicechain->len; ++i) {
+        packSliceBitMapArray* psarr=malloc(sizeof(packSliceBitMapArray));
+        psarr->layer=pf->slicechain->sliceArray[i]->layer;
+        psarr->len=pf->slicechain->sliceArray[i]->len;
+        psarr->lastWeight=pf->slicechain->sliceArray[i]->lastWeight;
+        for (int j = 0; j < psarr->len; ++j) {
+            packSliceBitMap* psbm=malloc(sizeof(packSliceBitMap));
+            psbm->weight=pf->slicechain->sliceArray[i]->slice[j]->weight;
+            char* main=malloc(psbm->weight);
+            char* pure=malloc(psbm->weight);
+            char* stop=malloc(psbm->weight);
+            char* last=malloc(psbm->weight*2);
+            *main=*pf->slicechain->sliceArray[i]->slice[j]->mainBitMap;
+            *pure=*pf->slicechain->sliceArray[i]->slice[j]->pureBitMap;
+            *stop=*pf->slicechain->sliceArray[i]->slice[j]->stopBitMap;
+            *last=*pf->slicechain->sliceArray[i]->slice[j]->lastBitMap;
+            psbm->mainBitMap=main;
+            psbm->pureBitMap=pure;
+            psbm->stopBitMap=stop;
+            psbm->lastBitMap=last;
+            psarr->slice[j]=psbm;
+        }
+        header->slicechain->sliceArray[i]=psarr;
+    }
+    return (char*) header;
+}
 static void PFAofRewrite(RedisModuleIO *aof, RedisModuleString *key, void *value){
     pfEntry *pf=value;
-
+    size_t len;
+    char* header=pfEntryHeader(pf,&len);
+    RedisModule_EmitAOF(aof,"PF.LOAD","pfloaf",key,header);
+    free(header);
 }
 
 static size_t PFMemUsage(const void *value){

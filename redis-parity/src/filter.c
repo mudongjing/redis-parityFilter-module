@@ -16,7 +16,9 @@ static int PFDel_RedisCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int
 static bool PFJudge_RedisCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc){
     return checkValueInKey(ctx,argv,argc);
 }
-
+static int PFAof_RedisCommand(RedisModuleCtx *ctx, RedisModuleString **argv, int argc){
+    loadAof(ctx,argv,argc);
+}
 static void freeBitMap(bitMap bitmap){
     for (int i = 0; i < bitmap.effcLen; ++i) {
         RedisModule_Free(bitmap.oneChar[i]);
@@ -65,7 +67,7 @@ int RedisModule_OnLoad(RedisModuleCtx *ctx, RedisModuleString **argv, int argc){
     CREATE_WRCMD("PF.ADD", PFAdd_RedisCommand);
     CREATE_WRCMD("PF.DEL", PFDel_RedisCommand);
     CREATE_WRCMD("PF.EXIST", PFJudge_RedisCommand);
-
+    CREATE_WRCMD("PF.LOAD",PFAof_RedisCommand);
 
     static RedisModuleTypeMethods typeprocs = {.version = REDISMODULE_TYPE_METHOD_VERSION,
             .rdb_load = PFRdbLoad,

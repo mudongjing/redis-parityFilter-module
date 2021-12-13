@@ -80,16 +80,34 @@
 		<Unit filename="E:/Documents/code/redis-module/redis-parity/library.h">
 			<Option target="redis_parity"/>
 		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/base.h">
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/base.h">
 			<Option target="redis_parity"/>
 		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/bash.c">
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/bash.c">
 			<Option target="redis_parity"/>
 		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/bitOp.c">
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/bitOp.c">
 			<Option target="redis_parity"/>
 		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/bitOp.h">
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/bitOp.h">
+			<Option target="redis_parity"/>
+		</Unit>
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/parity.c">
+			<Option target="redis_parity"/>
+		</Unit>
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/parity.h">
+			<Option target="redis_parity"/>
+		</Unit>
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/parityHash.c">
+			<Option target="redis_parity"/>
+		</Unit>
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/parityHash.h">
+			<Option target="redis_parity"/>
+		</Unit>
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/queue.c">
+			<Option target="redis_parity"/>
+		</Unit>
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/assist/queue.h">
 			<Option target="redis_parity"/>
 		</Unit>
 		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/filter.c">
@@ -101,22 +119,16 @@
 		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/filterInit.h">
 			<Option target="redis_parity"/>
 		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/parity.c">
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/keyAddAndDelOp.c">
 			<Option target="redis_parity"/>
 		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/parity.h">
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/keyAddAndDelOp.h">
 			<Option target="redis_parity"/>
 		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/parityHash.c">
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/persist/persist.c">
 			<Option target="redis_parity"/>
 		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/parityHash.h">
-			<Option target="redis_parity"/>
-		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/queue.c">
-			<Option target="redis_parity"/>
-		</Unit>
-		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/queue.h">
+		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/persist/persist.h">
 			<Option target="redis_parity"/>
 		</Unit>
 		<Unit filename="E:/Documents/code/redis-module/redis-parity/src/sliceAndPfOp.c">

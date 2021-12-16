@@ -1,3 +1,0 @@
-E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/redis_parity.dir
-E:/Documents/code/redis-module/redis-parity/cmake-build-debug/CMakeFiles/rebuild_cache.dir

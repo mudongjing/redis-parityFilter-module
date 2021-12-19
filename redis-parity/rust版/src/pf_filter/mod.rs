@@ -48,31 +48,89 @@ pub fn add_element(filter:&PF_filter,element:&String,width:u32) -> Request{
         return res;
     }else{
         let len = stop_array.len();
-        let original = filter.original_map();
-        let stop = filter.stop_map();
-        for i in (len-1)..=2{
-            if i == len-1 {
-                let arr = stop.get(i-3).unwrap();
-                let x = stop_array.get(i).unwrap();
-                if arr.get(x as usize).eq(&true){// 亿存在停留点
-                    let res = Request{succ:false,request:"already has an element".to_string()};
-                    return res;
-                }
-            }
-            if original.get(i).eq(&false) { }
+        let mut original = filter.original_map();
+        let mut stop = filter.stop_map();
+        let mut pure = filter.pure_map();
+        let mut arr = stop.get(len-1-3).unwrap();
+        let x = stop_array.get(0).unwrap();
+        if arr.get(x as usize).eq(&true){// 存在停留点
+            let res = Request{succ:false,request:"already has an element".to_string()};
+            return res;
         }
+        arr.set(x as usize,true);
 
         let res = Request{succ:true,request:"".to_string()};
+        if len-4 <= 0 { return res; }
+
+        for i in (1+len-4)..=1{ // 添加元素信息
+            let mut arr = original.get(len-1-i).unwrap();
+            let x = stop_array.get(i).unwrap();
+            if arr.get(x as usize).eq(&true){
+                let mut arr_p = pure.get(len-1-i).unwrap();
+                arr_p.set(x as usize,true);
+            }else{
+                arr.set(x as usize,true);
+            }
+        }
+
         return res;
     }
 }
 
-pub fn del_element(ilter:&PF_filter,element:&String,width:u32){
-    let stop_array = pf::stop_array(element,width);
+pub fn del_element(filter:&PF_filter,element:&String,width:u32) -> Request{
+    if jug_element(filter,element,width).eq(&true){
+        let stop_array = pf::stop_array(element,width);
+
+        let res = Request{succ:true,request:"".to_string()};
+
+        let len = stop_array.len();
+        let mut original = filter.original_map();
+        let mut stop = filter.stop_map();
+        let mut pure = filter.pure_map();
+        let mut arr = stop.get(len-1-3).unwrap();
+        let x = stop_array.get(0).unwrap();
+        arr.set(x as usize,false);//删除停留点
+
+        if len-4 <= 0 { return res; }
+
+        for i in (1+len-4)..=1{
+            let mut arr = pure.get(len-1-i).unwrap();
+            let x = stop_array.get(i).unwrap();
+
+            if arr.get(x as usize).eq(&false){
+                let mut arr_o = original.get(len-1-i).unwrap();
+                arr_o.set(x as usize,false);
+            }
+        }
+
+        return res;
+    }else{
+        let res = Request{succ:false,request:"do not have this element".to_string()};
+        return res;
+    }
 }
 
-pub fn jug_element(ilter:&PF_filter,element:&String,width:u32){
+pub fn jug_element(ilter:&PF_filter,element:&String,width:u32) -> bool{
     let stop_array = pf::stop_array(element,width);
+    if stop_array.len()==1 && stop_array.get(0) == 0{ return false; }
+    else{
+        let len = stop_array.len();
+        let  original = filter.original_map();
+        let  stop = filter.stop_map();
+        let  pure = filter.pure_map();
+        let  arr = stop.get(len-1-3).unwrap();
+        let x = stop_array.get(0).unwrap();
+        if arr.get(x as usize).eq(&true){ return false; }
+
+        if len-4 <= 0 { return true; }
+
+        for i in (1+len-4)..=1{
+            let arr = original.get(len-1-i).unwrap();
+            let x = stop_array.get(i).unwrap();
+            if arr.get(x as usize).eq(&false){ return false; }
+        }
+        return true;
+    }
 }
 
 

@@ -2,74 +2,76 @@ mod pf;
 use bit_vec::BitVec;
 // 前缀3次，默认最大高度为16
 // 所有位置均为停留点
-pub struct PF_filter{
-    width:u32,
+#[derive(Debug)]
+pub struct PfFilter{
+    width:usize,
+    
     original_map:Vec<BitVec>,// 即，这里最多放16个元素
+    
     pure_map:Vec<BitVec>,
+   
     stop_map:Vec<BitVec>,
 }
-impl PF_filter{
-    pub fn new(width:u32) ->PF_filter{
-        let HGIH = 16;
-        let mut original_map:Vec<BitVec> = Vec::new();
-        for i in 0..=16 {
-            let mut bit_vec = BitVec::from_elem(width as usize,false);
-            original_map.push(bit_vec);
-        }
-        let mut pure_map:Vec<BitVec> = Vec::new();
-        for i in 0..=16 {
-            let mut bit_vec = BitVec::from_elem(width as usize,false);
-            pure_map.push(bit_vec);
-        }
-        let mut stop_map:Vec<BitVec> = Vec::new();
-        for i in 0..=16 {
-            let mut bit_vec = BitVec::from_elem(width as usize,false);
-            stop_map.push(bit_vec);
-        }
-        PF_filter{width:width,original_map:original_map,pure_map:pure_map,stop_map:stop_map}
+
+impl PfFilter{
+    pub fn new(width:usize, original_map:Vec<BitVec>, pure_map:Vec<BitVec>, stop_map:Vec<BitVec>) -> PfFilter {
+      PfFilter{width:width,original_map:original_map,pure_map:pure_map,stop_map:stop_map}
     }
-    pub fn width(self) -> u32{ self.width }
-    pub fn original_map(self) -> Vec<BitVec>{ self.original_map }
-    pub fn pure_map(self) -> Vec<BitVec>{ self.pure_map }
-    pub fn stop_map(self) -> Vec<BitVec>{ self.stop_map }
-    pub fn set_width(&mut self,width:u32){ self.width=width; }
-    pub fn set_original_map(&mut self,location:usize,res:bool){ self.original_map.set(location,res); }
-    pub fn set_pure_map(&mut self,location:usize,res:bool){ self.pure_map.set(location,res); }
-    pub fn set_stop_map(&mut self,location:usize,res:bool){ self.stop_map.set(location,res); }
+    pub fn width(self) -> usize{ self.width }
+    pub fn set_width(&mut self,width:usize){ self.width=width; }
 }
+
+#[derive(Debug, Clone)]
 pub struct Request{
-    succ:bool,
-    request:String,
+    pub succ:bool,
+    pub request:String,
 }
-pub fn add_element(filter:&PF_filter,element:&String,width:u32) -> Request{
+impl Request{
+    pub fn new(succ:bool,request:String) -> Request{
+        Request{succ:succ,request:request}
+    }
+}
+
+
+pub fn add_element(filter:&mut PfFilter,element:&String) -> Request{
+    let width = filter.width;
     let stop_array = pf::stop_array(element,width);
-    if stop_array.len()==1 && stop_array.get(0) == 0{
+    
+    if stop_array.len()==1 && *stop_array.get(0).unwrap() == 0{
         let res = Request{succ:false,request:"exceed the limit".to_string()};
         return res;
     }else{
         let len = stop_array.len();
-        let mut original = filter.original_map();
-        let mut stop = filter.stop_map();
-        let mut pure = filter.pure_map();
-        let mut arr = stop.get(len-1-3).unwrap();
-        let x = stop_array.get(0).unwrap();
-        if arr.get(x as usize).eq(&true){// 存在停留点
+        let  original = &mut filter.original_map;
+        let  stop = &mut filter.stop_map;
+        let  pure = &mut filter.pure_map;
+        let mut arr = stop.get(len-1-3).unwrap().to_owned();
+        let x = *stop_array.get(0).unwrap();
+        if arr.get(x).unwrap().eq(&true){// 存在停留点
             let res = Request{succ:false,request:"already has an element".to_string()};
             return res;
         }
-        arr.set(x as usize,true);
+        arr.set(x,true);
 
         let res = Request{succ:true,request:"".to_string()};
-        if len-4 <= 0 { return res; }
+        if len-4 <= 0 {
+            stop.remove(len-4);
+            stop.insert(len-4,arr);
+            return res;
+        }
 
         for i in (1+len-4)..=1{ // 添加元素信息
-            let mut arr = original.get(len-1-i).unwrap();
-            let x = stop_array.get(i).unwrap();
-            if arr.get(x as usize).eq(&true){
-                let mut arr_p = pure.get(len-1-i).unwrap();
-                arr_p.set(x as usize,true);
+            let mut arr = original.get(len-1-i).unwrap().clone();
+            let x = *stop_array.get(i).unwrap();
+            if arr.get(x).unwrap().eq(&true){
+                let mut arr_p = pure.get(len-1-i).unwrap().clone();
+                arr_p.set(x ,true);
+                pure.remove(len-1-i);
+                pure.insert(len-1-i,arr_p);
             }else{
-                arr.set(x as usize,true);
+                arr.set(x,true);
+                original.remove(len-1-i);
+                original.insert(len-1-i,arr);
             }
         }
 
@@ -77,29 +79,36 @@ pub fn add_element(filter:&PF_filter,element:&String,width:u32) -> Request{
     }
 }
 
-pub fn del_element(filter:&PF_filter,element:&String,width:u32) -> Request{
-    if jug_element(filter,element,width).eq(&true){
+pub fn del_element(filter:&mut PfFilter,element:&String) -> Request{
+    let width = filter.width;
+    if jug_element(filter,element).eq(&true){
         let stop_array = pf::stop_array(element,width);
 
         let res = Request{succ:true,request:"".to_string()};
 
         let len = stop_array.len();
-        let mut original = filter.original_map();
-        let mut stop = filter.stop_map();
-        let mut pure = filter.pure_map();
-        let mut arr = stop.get(len-1-3).unwrap();
-        let x = stop_array.get(0).unwrap();
-        arr.set(x as usize,false);//删除停留点
+        let  original = &mut filter.original_map;
+        let  stop = &mut filter.stop_map;
+        let  pure = &mut filter.pure_map;
+        let mut arr = stop.get(len-1-3).unwrap().clone();
+        let x = *stop_array.get(0).unwrap();
+        arr.set(x,false);//删除停留点
 
-        if len-4 <= 0 { return res; }
+        if len-4 <= 0 {
+            stop.remove(len-4);
+            stop.insert(len-4,arr);
+            return res;
+        }
 
         for i in (1+len-4)..=1{
-            let mut arr = pure.get(len-1-i).unwrap();
-            let x = stop_array.get(i).unwrap();
+            let arr = pure.get(len-1-i).unwrap();
+            let x = *stop_array.get(i).unwrap();
 
-            if arr.get(x as usize).eq(&false){
-                let mut arr_o = original.get(len-1-i).unwrap();
+            if arr.get(x).unwrap().eq(&false){
+                let mut arr_o = original.get(len-1-i).unwrap().clone();
                 arr_o.set(x as usize,false);
+                original.remove(len-1-i);
+                original.insert(len-1-i,arr_o);
             }
         }
 
@@ -110,27 +119,47 @@ pub fn del_element(filter:&PF_filter,element:&String,width:u32) -> Request{
     }
 }
 
-pub fn jug_element(ilter:&PF_filter,element:&String,width:u32) -> bool{
+pub fn jug_element(filter:&PfFilter,element:&String) -> bool{
+    let width = filter.width;
     let stop_array = pf::stop_array(element,width);
-    if stop_array.len()==1 && stop_array.get(0) == 0{ return false; }
+    if stop_array.len()==1 && *stop_array.get(0).unwrap() == 0{ return false; }
     else{
         let len = stop_array.len();
-        let  original = filter.original_map();
-        let  stop = filter.stop_map();
-        let  pure = filter.pure_map();
+        let  original = &filter.original_map;
+        let  stop = &filter.stop_map;
+        let  pure = &filter.pure_map;
         let  arr = stop.get(len-1-3).unwrap();
-        let x = stop_array.get(0).unwrap();
-        if arr.get(x as usize).eq(&true){ return false; }
+        let x = *stop_array.get(0).unwrap();
+        if arr.get(x).unwrap().eq(&true){ return false; }
 
         if len-4 <= 0 { return true; }
 
         for i in (1+len-4)..=1{
             let arr = original.get(len-1-i).unwrap();
-            let x = stop_array.get(i).unwrap();
-            if arr.get(x as usize).eq(&false){ return false; }
+            let x = *stop_array.get(i).unwrap();
+            if arr.get(x).unwrap().eq(&false){ return false; }
         }
         return true;
     }
 }
 
+pub fn init_pf(width:usize) -> PfFilter{
 
+    let HGIH = 16;
+    let mut original_map:Vec<BitVec> = Vec::new();
+    for i in 0..=16 {
+        original_map.push(BitVec::from_elem(width,false));
+    }
+    let mut pure_map:Vec<BitVec> = Vec::new();
+    for i in 0..=16 {
+        let  bit_vec = BitVec::from_elem(width,false);
+        pure_map.push(bit_vec);
+    }
+    let mut stop_map:Vec<BitVec> = Vec::new();
+    for i in 0..=16 {
+        let  bit_vec = BitVec::from_elem(width,false);
+        stop_map.push(bit_vec);
+    }
+
+    PfFilter::new(width,original_map,pure_map,stop_map)
+}
